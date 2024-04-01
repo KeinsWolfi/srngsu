@@ -44,11 +44,11 @@ while True:
         dayTime = finalCurr / 86400
         dayTime = str("%.2f" % dayTime)
 
+        #opens the auras image and reads the text from it
         imah = Image.open('auras.png')
-
         text = pytesseract.image_to_string(imah)
-        
 
+        #tries to split the text to get the numbers
         try:
             text = text.split("[")
             text = text[1].split("]")
@@ -74,13 +74,16 @@ while True:
             print("Inventory not open or no auras detected at " + time.strftime("%Y-%m-%d : %H:%M:%S", time.localtime()))
             webhook.set_content(content="Inventory not open or no auras detected at " + time.strftime("%Y-%m-%d : %H:%M:%S", time.localtime()))
 
+
+        #sets the title and footer of the embed
         embed.set_title(title='Sol\'s RNG')
         embed.set_footer(text="Taken at: " + time.strftime("%Y-%m-%d : %H:%M:%S", time.localtime()) + " and has been running for " + dayTime + "d/ " + hourTime + "h/ " + minTime + "m and " + secTime + "s")
 
+
+        #adds the screenshot and embed to the webhook
         with open('screen.png', 'rb') as f:
             file_data = f.read()
         webhook.add_file(file=file_data, filename='screen.png')
-        
         webhook.add_embed(embed)
 
         r = webhook.execute()
@@ -90,6 +93,18 @@ while True:
     except Exception as e:
         print(e)
         pass
+
+    #macro section, am gonna finish later
+    
+    #keyboard.press_and_release('f')
+    #keyboard.press('w')
+    #time.sleep(0.5)
+    #keyboard.release('w')
+    #keyboard.press('s')
+    #time.sleep(0.5)
+    #keyboard.release('s') 
+
+    #sleep function with a option to exit the program
     while cd > 0:
         time.sleep(0.1)
         cd -= 1
@@ -119,4 +134,5 @@ while True:
             webhook.remove_embeds()
 
             exit()
+    
     oldNum1 = int(num1)
