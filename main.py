@@ -60,6 +60,10 @@ while True:
 
             if((num1 == num2) or (int(num1) >= (int(num2) - 4))):
                 webhook.set_content(content="@everyone AURA INV FULL OR CLOSE TO FULL!")
+                if(change != 0):
+                    embed.set_description(description="Aura Inv: " + num1 + "/" + num2 + " (" + str(change) + ")")
+                else:
+                    embed.set_description(description="Aura Inv: " + num1 + "/" + num2)
             else:
                 webhook.content = None
                 if(change != 0):
